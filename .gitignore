@@ -120,6 +120,7 @@
 .hypothesis/
 .installed.cfg
 .mypy_cache/
+.p4*
 .pytest_cache/
 .ropeproject
 .spyderproject
@@ -179,9 +180,10 @@ x64_v*
 # --- Auto Generated to be ignored.
 
 /.git
-/.vscode
+/.p4root
 /bin/gitterdone/__pycache__
 /gitterdonelogs
 /source
+/testdir
 
 # END GEN ******************************************

@@ -177,6 +177,7 @@ GIT_FILE_IGNORE_LIST = [
     ".hypothesis/",
     ".installed.cfg",
     ".mypy_cache/",
+    ".p4*",
     ".pytest_cache/",
     ".ropeproject",
     ".spyderproject",
