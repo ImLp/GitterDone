@@ -1,4 +1,3 @@
-# pylint: disable=E0402
 """A module handling a lot of the common git specific operations will be using.
 
 Attributes:

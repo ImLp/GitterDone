@@ -157,7 +157,6 @@ GIT_FILE_IGNORE_LIST = [
     "*[Pp]ublish.xml",
     "*[Rr]e[Ss]harper",
     "*_2015.vcxproj*",
-    "*__*__*",
     "*_i.c",
     "*_ispc.h",
     "*_p.c"
@@ -184,6 +183,7 @@ GIT_FILE_IGNORE_LIST = [
     ".spyproject",
     ".tox/",
     ".venv",
+    ".vscode/",
     ".webassets-cache",
     "/*.log",
     "/*.txt",

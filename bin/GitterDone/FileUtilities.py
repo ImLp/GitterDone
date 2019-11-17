@@ -1,4 +1,3 @@
-# pylint: disable=E0402
 """A module focused on path & file handling operations."""
 import glob
 import os

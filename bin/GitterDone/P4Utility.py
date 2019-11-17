@@ -1,4 +1,3 @@
-# pylint: disable=E0402
 """
 P4<->Git command line automation interface script.
 

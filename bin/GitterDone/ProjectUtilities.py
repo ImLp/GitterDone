@@ -1,4 +1,3 @@
-# pylint: disable=E0402
 """A module used to access all the project specific information."""
 
 import logging
