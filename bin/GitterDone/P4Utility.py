@@ -496,9 +496,10 @@ def _execute_forced_sync_in_p4_to_cl(change_list_number: str,
                               command_results)
                 return False
         else:
-            logging.error("Forced sync unsuccessful. Path '%s' not found.",
-                          path)
-            return False
+            error_msg = (f'File \"{absolute_path}\" no longer exists.'
+                         f' Ignoring sync')
+            logging.error(error_msg)
+            return True
     return True
 
 
@@ -523,6 +524,11 @@ def _execute_p4_smart_sync_to_cl(change_list_number: str, file_path: str):
             absolute_path = file_path + '...'
         else:
             absolute_path = file_path + '/...'
+
+    if not os.path.exists(absolute_path):
+        error_msg = f'File \"{absolute_path}\" no longer exists. Ignoring sync'
+        logging.error(error_msg)
+        return True
 
     command = project.get_p4vfs_tool_path() + " sync -f " + \
         str_utility.normalize_string(absolute_path + "@" + change_list_number)
