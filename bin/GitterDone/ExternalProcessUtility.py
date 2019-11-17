@@ -20,7 +20,10 @@ def trigger_external_subprocess(command, debug_mode=False):
     logging.info("Triggering external command: %s", command)
     try:
         if not debug_mode:
-            output = subprocess.check_output(command, stderr=subprocess.STDOUT)
+            output = subprocess.check_output(command,
+                                             stderr=subprocess.STDOUT,
+                                             shell=True)
+
             result = output.decode(encoding="utf-8", errors="ignore")
         else:
             result = command
