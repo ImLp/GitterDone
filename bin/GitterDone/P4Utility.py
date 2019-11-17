@@ -126,9 +126,9 @@ def _revert_unchanged_files_in_p4():
         command_results = external_process.trigger_external_subprocess(
             command)
     if not successfull_command_call:
-        logging.error(
-            ('Encountered an error when'
-             ' reverting unchanged files: %s', command_results))
+        error_msg = (f'Encountered an error when'
+                     f' reverting unchanged files: {command_results}')
+        logging.error(error_msg)
 
 
 def _revert_config_file_changes():
@@ -139,13 +139,14 @@ def _revert_config_file_changes():
         None.
 
     """
-    command = 'git checkout -- Config.py'
+    command = 'git checkout -- bin/GitterDone/Config.py'
     successfull_command_call, \
         command_results = external_process.trigger_external_subprocess(
             command)
     if not successfull_command_call:
-        logging.error(('Encountered an error reverting '
-                       'Config.py changes %s', command_results))
+        error_msg = (f'Encountered an error reverting Config.py changes.'
+                     f' Response: {command_results}')
+        logging.error(error_msg)
 
 
 def _checkout_files_in_p4(file_list: list):
@@ -513,7 +514,7 @@ def _execute_p4_smart_sync_to_cl(change_list_number: str, file_path: str):
         bool: True if the sync command was successful.
 
     """
-    logging.info('Executing a smart sync of %s To CL:%s',
+    logging.info('Executing a sync of %s To CL:%s',
                  file_path,
                  change_list_number)
 
@@ -523,17 +524,17 @@ def _execute_p4_smart_sync_to_cl(change_list_number: str, file_path: str):
         else:
             absolute_path = file_path + '/...'
 
-    command = project.get_p4vfs_tool_path() + " sync -w " + \
+    command = project.get_p4vfs_tool_path() + " sync -f " + \
         str_utility.normalize_string(absolute_path + "@" + change_list_number)
 
     successfull_command_call, \
         command_results = external_process.trigger_external_subprocess(
             command)
     if successfull_command_call:
-        logging.info('%s Smart sync completed successfully.', absolute_path)
+        logging.info('%s Sync completed successfully.', absolute_path)
 
     else:
-        logging.info('%s Smart sync unsuccessful, terminating. Response: %s',
+        logging.info('%s Sync unsuccessful, terminating. Response: %s',
                      absolute_path,
                      command_results)
         return False
@@ -553,7 +554,7 @@ def _sync_p4_to_changelist(desired_cl: str, force_all: bool = False):
         bool: True if the sync command was successful.
 
     """
-    logging.info('Updating %s to CL: %s',
+    logging.info('Updating %s to CL %s',
                  project.get_project_root_path(),
                  desired_cl)
 
