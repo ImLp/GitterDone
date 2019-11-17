@@ -1,0 +1,24 @@
+#!/usr/local/bin/python3
+import sys
+import subprocess
+
+COMMAND = '/usr/local/bin/pytest -v'
+PROCESS = subprocess.Popen(COMMAND,
+                           shell=True,
+                           stdout=subprocess.PIPE,
+                           stderr=subprocess.STDOUT)
+
+while True:
+    OUTPUT = PROCESS.stdout.readline().decode(
+        encoding="utf-8",
+        errors="ignore")
+    if OUTPUT == '' and PROCESS.poll() is not None:
+        break
+    if OUTPUT:
+        OUTPUT = OUTPUT.rstrip()
+        print(OUTPUT.strip())
+print(OUTPUT)
+
+if PROCESS.returncode != 0:
+    print("Test Failures Encountered")
+    sys.exit(1)

@@ -11,6 +11,6 @@ def test_normalize_string():
 
 def test_normalize_wildcards():
     """This test should Fail."""
-    expect = "abc*"
+    expect = "abc"
     actual = StringUtilities.normalize_string("abc*", remove_wildcards=True)
     assert expect == actual
