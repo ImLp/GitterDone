@@ -3,7 +3,7 @@ import logging
 import subprocess
 
 
-def trigger_external_subprocess(command, debug_mode=False):
+def trigger_external_subprocess(command):
     """
     Trigger  an external subprocess command.
 
@@ -19,14 +19,12 @@ def trigger_external_subprocess(command, debug_mode=False):
     """
     logging.info("Triggering external command: %s", command)
     try:
-        if not debug_mode:
-            output = subprocess.check_output(command,
-                                             stderr=subprocess.STDOUT,
-                                             shell=True)
+        output = subprocess.check_output(command,
+                                         stderr=subprocess.STDOUT,
+                                         shell=True)
 
-            result = output.decode(encoding="utf-8", errors="ignore")
-        else:
-            result = command
+        result = output.decode(encoding="utf-8", errors="ignore")
+        result = result.rstrip()
         logging.debug("Command Response:\n%s", result)
         return True, result
     except subprocess.CalledProcessError as ex:
@@ -58,10 +56,10 @@ def trigger_external_subprocess_with_live_output(command):
             output = process.stdout.readline().decode(
                 encoding="utf-8",
                 errors="ignore")
-
             if output == '' and process.poll() is not None:
                 break
             if output:
+                output = output.rstrip()
                 print(output.strip())
                 final_output.append(output)
 
