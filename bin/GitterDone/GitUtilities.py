@@ -205,8 +205,8 @@ def get_modified_files_for_branch(
                        ' --name-status --oneline --no-merges')
         else:
             command = (f'git log {desired_branch} --name-status '
-                       '--oneline --no-merges --not '
-                       '{trunk_branch_name} {ignored_branches}')
+                       f'--oneline --no-merges --not '
+                       f'{trunk_branch_name} {ignored_branches}')
     else:
         logging.info('Getting all the commits for the entire repository')
         if include_trunk_branch:
@@ -214,8 +214,8 @@ def get_modified_files_for_branch(
             command = 'git log --all --name-status --oneline --no-merges'
         else:
             command = (f'git log --all --name-status'
-                       ' --oneline--no-merges'
-                       ' --not {trunk_branch_name} {ignored_branches}')
+                       f' --oneline--no-merges'
+                       f' --not {trunk_branch_name} {ignored_branches}')
 
     successfull_command_call, \
         command_results = external_process.trigger_external_subprocess(
