@@ -205,29 +205,26 @@ def convert_to_regex_entry(string_input: str):
     """
     result = string_input
 
-    """
-    SPECIAL CASE: Checking if we are actually trying to ignore an extension.
-        Force check at the end of the string. If we don't do this, then we
-        end up ignoring the wrong things.
-    """
+    # SPECIAL CASE: Checking if we are actually trying to ignore an extension.
+    #   Force check at the end of the string. If we don't do this, then we
+    #   end up ignoring the wrong things.
+
     if result.startswith("*") and not result.endswith("*"):
         result = result + '$'
 
-    """
-    SPECIAL CASE: Periods are any character in regex. But python doesn't
-        push the string as single backlash for it to be correctly escaped.
-        Instead it uses '\\.' which translates to matching a backlash +
-        any character
-    """
+    # SPECIAL CASE: Periods are any character in regex. But python doesn't
+    #    push the string as single backlash for it to be correctly escaped.
+    #    Instead it uses '\\.' which translates to matching a backlash +
+    #     any character
+
     if "." in result:
         # Captures wildcards anywhere in the string
         result = result.replace(".", "[.]")
 
-    """
-    SPECIAL CASE: Translating the wildcard. A wildcard matches everything
-        in git which is the equivalent of the greedy capture all character
-        quantifier .*
-    """
+    # SPECIAL CASE: Translating the wildcard. A wildcard matches everything
+    #   in git which is the equivalent of the greedy capture all character
+    #   quantifier .*
+
     if "*" in result:
         # Captures wildcards anywhere in the string
         result = result.replace("*", ".*")

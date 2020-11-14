@@ -10,7 +10,7 @@ import sys
 def verify_python_version():
     """Verify that the Python 3+ requirement has been met."""
     if sys.version_info[0] < 3:
-        logging.error('This script requires Python 3 or greater,\
+        logging.error(f'This script requires Python 3 or greater,\
         \nThe detected version is Python {0}. Terminating Execution'.format(
             sys.version_info[0]))
         terminate(True)

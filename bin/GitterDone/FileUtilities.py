@@ -194,6 +194,7 @@ def _build_pattern_list(root_directory: str,
     return desired_pattern
 
 
+# pylint: disable=too-many-arguments
 def _cull_files(root_directory: str,
                 raw_files: list,
                 desired_patterns: list,
@@ -235,8 +236,10 @@ def _cull_files(root_directory: str,
                                             files_to_ignore)
 
     return files_to_ignore
+# pylint: enable=too-many-arguments
 
 
+# pylint: disable=too-many-locals
 def recursely_get_ignored(root_directory: str,
                           results: list,
                           desired: list,
@@ -330,13 +333,13 @@ def recursely_get_ignored(root_directory: str,
                                   results,
                                   ignore_regex,
                                   should_ignore_files)
-    """
-        if the current folder is the last on the desired group and there are
-        no more folders to walk under. Then we may want to add the files here
-         as the desired entry includes all of it.
-    """
+    # if the current folder is the last on the desired group and there are
+    # no more folders to walk under. Then we may want to add the files here
+    # as the desired entry includes all of it.
 
     results += [x for x in files_to_ignore if x.lower() not in results]
     results += [x for x in directories_to_ignore if x.lower() not in results]
     return results
+
+# pylint: enable=too-many-locals
 # ============================================================================

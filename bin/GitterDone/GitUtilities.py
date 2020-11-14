@@ -247,10 +247,8 @@ def _parse_modified_files_list(plain_text_input: str):
 
     lines = plain_text_input.splitlines()
 
-    """
-    Reverse the list so we follow a chronological order. Important for special
-    cases where a file is first deleted and then added again, for example
-    """
+    # Reverse the list so we follow a chronological order. Important in special
+    # cases e.g. A file is first deleted and then added again.
     lines.reverse()
 
     pretty_lines_list = str_utility.friendly_list_to_str(lines)
